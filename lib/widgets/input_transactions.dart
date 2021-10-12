@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class InputTransactions extends StatefulWidget {
   final Function transactionHandler;
@@ -18,15 +19,35 @@ class _InputTransactionsState extends State<InputTransactions> {
   void inputHandler() {
     var titleInputData = titleController.text;
     var amountInputData = double.parse(amountController.text);
-
-    if (titleInputData.isEmpty || amountInputData <= 0) {
+    if (titleInputData.isEmpty || amountInputData <= 0 || datePicked == null) {
       return;
     }
 //with  widget. prpety of flutter you can access the property of a widget  from its state class like here
     widget.transactionHandler(
-        titleController.text, double.parse(amountController.text));
+        titleController.text, double.parse(amountController.text), datePicked);
 
     Navigator.of(context).pop();
+  }
+
+  var datePicked;
+
+  void datePickerHandler() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2021),
+            lastDate: DateTime.now())
+        .then(
+      (dateSelected) {
+        if (dateSelected == null) {
+          return;
+        } else {
+          setState(() {
+            datePicked = dateSelected;
+          });
+        }
+      },
+    );
   }
 
   @override
@@ -59,7 +80,32 @@ class _InputTransactionsState extends State<InputTransactions> {
               //   amountInput = val;
               // },
             ),
-            FlatButton(
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(datePicked == null
+                        ? 'No Date Choosen'
+                        : 'Date: ${DateFormat().format(datePicked)}'),
+                  ),
+                  FlatButton(
+                      onPressed: () {
+                        datePickerHandler();
+                      },
+                      child: FittedBox(
+                        child: Text(
+                          'Choose Date',
+                          style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            RaisedButton(
+              color: Theme.of(context).primaryColor,
               onPressed: () {
                 inputHandler();
                 // print(titleInput);
@@ -67,7 +113,7 @@ class _InputTransactionsState extends State<InputTransactions> {
               },
               child: Text(
                 'Add Transaction',
-                style: TextStyle(color: Colors.purple),
+                style: TextStyle(color: Colors.white),
               ),
             )
           ],

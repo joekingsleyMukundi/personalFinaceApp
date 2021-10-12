@@ -42,7 +42,7 @@ class Chart extends StatelessWidget {
     print(groupedTransactionsValues);
     return Card(
       elevation: 5,
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,7 +51,7 @@ class Chart extends StatelessWidget {
               return Flexible(
                 fit: FlexFit.tight,
                 child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(5),
                   child: ChartBar(
                       transactiondata['day'],
                       transactiondata['amount'],
