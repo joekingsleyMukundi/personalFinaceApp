@@ -25,7 +25,7 @@ class _InputTransactionsState extends State<InputTransactions> {
 //with  widget. prpety of flutter you can access the property of a widget  from its state class like here
     widget.transactionHandler(
         titleController.text, double.parse(amountController.text), datePicked);
-
+//to close the  modal bottom sheet
     Navigator.of(context).pop();
   }
 
