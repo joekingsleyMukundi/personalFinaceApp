@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                   height: (MediaQuery.of(context).size.height -
                           appBar.preferredSize.height -
                           MediaQuery.of(context).padding.top) *
-                      0.661,
+                      0.6,
                   child: TransactionList(transactions, deleteTransaction),
                 ),
               ),

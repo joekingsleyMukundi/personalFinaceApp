@@ -17,10 +17,10 @@ class TransactionList extends StatelessWidget {
                 children: [
                   Text('no transactions available'),
                   SizedBox(
-                    height: 20,
+                    height: constraints.maxHeight * 0.1,
                   ),
                   Container(
-                    height: 300,
+                    height: constraints.maxHeight * 0.8,
                     child: Image.asset(
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,
@@ -33,7 +33,7 @@ class TransactionList extends StatelessWidget {
         : ListView.builder(
             itemBuilder: (context, index) {
               return Container(
-                margin: EdgeInsets.all(5),
+                margin: EdgeInsets.all(10),
                 child: Card(
                   elevation: 10,
                   child: ListTile(
